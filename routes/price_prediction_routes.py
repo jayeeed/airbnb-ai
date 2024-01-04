@@ -1,21 +1,15 @@
 from flask import request, jsonify, make_response, Blueprint
 from sklearn.impute import SimpleImputer
 from sklearn.neighbors import NearestNeighbors
-from price_prediction.price import X_test_scaled,HistGradientBoostingRegressor_model,google_locations,property_df
-# import pandas as pd
+from features.price_prediction.price import X_test_scaled,HistGradientBoostingRegressor_model,google_locations,property_df
 import numpy as np
 from textblob import TextBlob
-# from flask_cors import CORS, cross_origin
-# from app import mongo
+from flask_cors import CORS
 
 price_predict_routes = Blueprint('price_predict_routes', __name__)
 
-from flask_cors import CORS
-
 # CORS(search_properties_route, resources={r"/api/recommended/*": {"origins": "http://localhost:3009"}})
 
-# @app.route('/predict', methods=['POST', 'OPTIONS'])
-# @cross_origin(origin="localhost", headers=["Content-Type", "authorization"])
 @price_predict_routes.route('/price', methods=['POST', 'OPTIONS'])
 def handle_price_options():
     if request.method == 'OPTIONS':
@@ -172,38 +166,3 @@ def get_emotion_from_text(description):
             return "neutral"
     else:
         return 'neutral'
-
-
-# if __name__ == '__main__':
-#     app.run('localhost', 5002)
-
-
-
-
-# CORS(app, resources={r"/add-properties": {"origins": "http://localhost:3009"}})
-
-# property_data = list(mongo.db.allproperties.find())
-
-# data = pd.DataFrame(property_data)
-
-# property_df = data.drop(columns=['_id', 'userId', 'title', 'placeDescribesId', 'typeOfPlaceId', 'images', 'located', 'guests', 'price',
-#                         'amenitiesIds', 'address', 'decideReservations', 'discounts', 'status', 'createdAt', 'updatedAt', '__v'])
-# print(property_df)
-
-# # Extract the reviews from the DataFrame
-# reviews = np.array(property_df['description'])
-# test_reviews = reviews[::]
-# sample_review_ids = []
-# test_reviews = np.array(test_reviews)
-
-# for sample_review_id in sample_review_ids:
-#     description = test_reviews[sample_review_id]
-#     print('REVIEW:', description)
-#     print('Predicted Sentiment polarity:',
-#           TextBlob(description).sentiment.polarity)
-#     print('-' * 60)
-
-# # Calculate sentiment polarity for all test reviews
-# sentiment_polarity = [
-#     TextBlob(review).sentiment.polarity for review in test_reviews]
-# print(sentiment_polarity)
