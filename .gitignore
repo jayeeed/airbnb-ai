@@ -8,3 +8,11 @@ routes/__pycache__
 utils/__pycache__/
 .vscode/settings.json
 sentiment_final/__pycache__/
+features/instant_varification/__pycache__/
+features/instant_varification/output/
+features/instant_varification/utils/__pycache__/
+features/price_prediction/__pycache__/
+features/price_prediction/ml_models/
+features/instant_varification/test/templates/
+features/instant_varification/test/
+features/instant_varification/test/
