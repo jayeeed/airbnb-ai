@@ -173,11 +173,11 @@ print("Mean Squared Error:", mse)
 
 
 
-joblib.dump(HistGradientBoostingRegressor_model, 'features/price_prediction/ml_models/model.joblib')
-joblib.dump(scaler, 'features/price_prediction/ml_models/scaler.joblib')
+joblib.dump(HistGradientBoostingRegressor_model, 'data/model.joblib')
+joblib.dump(scaler, 'data/scaler.joblib')
 
 
-loaded_model = joblib.load('features/price_prediction/ml_models/model.joblib')
+loaded_model = joblib.load('data/model.joblib')
 
 
 

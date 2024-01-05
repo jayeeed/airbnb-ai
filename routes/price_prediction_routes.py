@@ -1,7 +1,8 @@
 from flask import request, jsonify, make_response, Blueprint
+from pymongo import MongoClient
 from sklearn.impute import SimpleImputer
 from sklearn.neighbors import NearestNeighbors
-from features.price_prediction.price import X_test_scaled,HistGradientBoostingRegressor_model,google_locations,property_df
+from models.price_model import X_test_scaled,HistGradientBoostingRegressor_model,google_locations,property_df
 import numpy as np
 from textblob import TextBlob
 from flask_cors import CORS
@@ -44,7 +45,7 @@ def handle_price_options():
         print("title", title)
 
     if title and placeDescribesId and typeOfPlaceId and located and address and guests and amenitiesIds and images and request.method == 'POST':
-        id = mongo.db.prediction.insert_one({
+        id = MongoClient.db.prediction.insert_one({
             "shortTitle": title, "placeDescibe": placeDescribesId, "typeOfPlace": typeOfPlaceId,
             "locatedPlace": located, "addAddress": address, "guests": guests, "offer": amenitiesIds, "uploadPhoto": images,
             "suggested_price": suggested_price,
@@ -119,7 +120,7 @@ def handle_description_options():
         print(emotion)
 
     if description and request.method == 'POST':
-        id = mongo.db.description.insert_one({
+        id = MongoClient.db.description.insert_one({
             "description": description,
             "sentiment": sentiment,
             "emotion": emotion
